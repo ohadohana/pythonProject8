@@ -95,6 +95,19 @@ def get_guess():
     return None
 
 
+def is_valid_input(letter_guessed):
+    guess = input("Please enter a letter (your guess): ")
+
+    if any(not x.isalpha() for x in guess) and len(guess) > 1:
+        return False
+    elif not guess.isalpha():
+        return False
+    elif len(guess) > 1:
+        return False
+    else:
+        return True
+
+
 def generate_underscore_string():
     word = input("Please enter a word without spaces: ")
     underscore_string = "_" * len(word)
