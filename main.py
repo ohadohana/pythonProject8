@@ -1,7 +1,7 @@
 import random
 
 def start_game():
-
+    HANGMAN_ASCII_ART=  "Welcome to the game Hangman.\n"
     hangman_text = """
      _    _                                         
     | |  | |                                        
@@ -13,12 +13,10 @@ def start_game():
                         |___/                      
     """
 
-    attempts_allowed = random.randint(5, 10)
+    MAX_TRIES = random.randint(5, 10)
 
-    # הדפסת מסך הפתיחה
-    print("Welcome to the game Hangman.\n")
     print(hangman_text)
-    print(f"Number of attempts allowed: {attempts_allowed}")
+    print(f"Number of attempts allowed: {MAX_TRIES}")
 
 
 def print_hangman(step):
@@ -78,8 +76,12 @@ def print_hangman(step):
 
     print(hangman_pics[step])
 
+def get_guess():
+    guess = input("Guess a letter: ")
+    return guess
 
 
-
+player_guess = get_guess()
+print(player_guess)
 start_game()
 print_hangman(1)
