@@ -76,12 +76,25 @@ def print_hangman(step):
 
     print(hangman_pics[step])
 
+
 def get_guess():
-    guess = input("Guess a letter: ")
+    guess = input("Guess a letter:")
+    if guess.isalpha() and guess.isupper():
+        guess = guess.lower()
     return guess
+
+
+def generate_underscore_string():
+    word = input("Please enter a word without spaces: ")
+    underscore_string = "_" * len(word)
+    print(underscore_string)
+
+
 
 
 player_guess = get_guess()
 print(player_guess)
 start_game()
 print_hangman(1)
+generate_underscore_string()
+
