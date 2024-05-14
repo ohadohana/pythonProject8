@@ -96,13 +96,13 @@ def get_guess():
 
 
 def is_valid_input(letter_guessed):
-    guess = input("Please enter a letter (your guess): ")
 
-    if any(not x.isalpha() for x in guess) and len(guess) > 1:
+
+    if any(not x.isalpha() for x in letter_guessed) and len(letter_guessed) > 1:
         return False
-    elif not guess.isalpha():
+    elif any(not x.isalpha() for x in letter_guessed):
         return False
-    elif len(guess) > 1:
+    elif len(letter_guessed) > 1:
         return False
     else:
         return True
@@ -113,11 +113,19 @@ def generate_underscore_string():
     underscore_string = "_" * len(word)
     print(underscore_string)
 
+def check_valid_input(letter_guessed, old_letters_guessed):
+    if not is_valid_input(letter_guessed):
+        return False
+    letter_guessed=letter_guessed.lower()
+    if letter_guessed in old_letters_guessed:
+        return False
+    return True
 
 
 
-player_guess = get_guess()
-start_game()
-print_hangman(1)
-generate_underscore_string()
+print(check_valid_input("C",{"a","b"}))
+# player_guess = get_guess()
+# start_game()
+# print_hangman(1)
+# generate_underscore_string()
 
