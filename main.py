@@ -78,10 +78,21 @@ def print_hangman(step):
 
 
 def get_guess():
-    guess = input("Guess a letter:")
-    if guess.isalpha() and guess.isupper():
-        guess = guess.lower()
-    return guess
+    guess = input("Please enter a letter (your guess): ")
+
+    if any(not x.isalpha() for x in guess) and len(guess) > 1:
+        print("E3")
+    elif not guess.isalpha():
+        print("E2")
+    elif len(guess) > 1:
+        print("E1")
+    else:
+        if guess.isupper():
+            guess = guess.lower()
+        print(guess)
+        return guess
+
+    return None
 
 
 def generate_underscore_string():
@@ -93,7 +104,6 @@ def generate_underscore_string():
 
 
 player_guess = get_guess()
-print(player_guess)
 start_game()
 print_hangman(1)
 generate_underscore_string()
