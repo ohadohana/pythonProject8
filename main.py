@@ -18,6 +18,8 @@ def start_game():
     print(hangman_text)
     print(f"Number of attempts allowed: {MAX_TRIES}")
 
+    #פונקציה המדפיסה את כמות הפעמים שאפשר לטעות בניחוש המילה וגם מדפיסה מסך פתיחה לתחילת המשחק
+
 
 def print_hangman(step):
     hangman_pics = [
@@ -76,6 +78,8 @@ def print_hangman(step):
 
     print(hangman_pics[step])
 
+    #פונקציה המקבלת את הלשב בנוכחי במשחק, השלב זה כמות האותיות שהשחקן ניחש עד כה ומדפיסה מצב משחק מטעים
+
 
 def get_guess():
     guess = input("Please enter a letter (your guess): ")
@@ -93,6 +97,7 @@ def get_guess():
         return guess
 
     return None
+#פונקציה הבודקת האם הפלט שהוזן חוקי לפי חוקי המשחק האם האות היא תו חוקי האם זה אות בודדת ואם גן מחזיקה את האות
 
 
 def is_valid_input(letter_guessed):
@@ -107,11 +112,15 @@ def is_valid_input(letter_guessed):
     else:
         return True
 
+    # פונקציה הבודקת האם הפלט שהוזן חוקי לפי חוקי המשחק האם האות היא תו חוקי האם זה אות בודדת ומחזירה נכון אם האות חוקית ושקר אם האות לא חוקית
 
-def generate_underscore_string():
-    word = input("Please enter a word without spaces: ")
+
+def generate_underscore_string(word):
     underscore_string = "_" * len(word)
     print(underscore_string)
+    #פונקציה המקבלת את מילת המשחק ומדפיסה _ לפי אורך המילה
+
+
 
 def check_valid_input(letter_guessed, old_letters_guessed):
     if not is_valid_input(letter_guessed):
@@ -120,7 +129,7 @@ def check_valid_input(letter_guessed, old_letters_guessed):
     if letter_guessed in old_letters_guessed:
         return False
     return True
-
+#פונקציב שבודקת האם הקלט חוקי וגם הקלט לא שומש כבר בקלטים קודמים אם כן מחזיקה אמת אחרת שקר
 
 def try_update_letter_guessed(letter_guessed, old_letters_guessed):
     if check_valid_input(letter_guessed, old_letters_guessed):
@@ -130,6 +139,7 @@ def try_update_letter_guessed(letter_guessed, old_letters_guessed):
         print("X\n")
         print(" -> ".join(old_letters_guessed))
         return False
+    #פונקציה שמוסיפה את הקלט למערך הקלטים הקודמים אם הקלט חוקי ולא הופיעה כבר ומחזירה שקר אחת ומדפיס את התווים ששומשו שכבר נקלטו עד כה
 
 
 def show_hidden_word(secret_word, old_letters_guessed):
@@ -144,12 +154,15 @@ def show_hidden_word(secret_word, old_letters_guessed):
         progress += " "
 
     return progress.strip()
+#פונקציה שמחזירה את מצב המשחק הנוכחי כל אות שהשחקן גילה היא מוסיפה וכל אות שהוא לא גילה מוסיפה _ במקום האות
+
 
 def check_win(secret_word, old_letters_guessed):
     for char in secret_word:
         if char not in old_letters_guessed:
             return False
     return True
+# פונקציה שבודקת האם השחקן ניצח לעומת רשימת התווים שנקלטו מול המילה שנבחרה במשחק
 
 def print_hangman(num_of_tries):
     hangman_pics = [
@@ -208,6 +221,9 @@ def print_hangman(num_of_tries):
 
     print(hangman_pics[num_of_tries])
 
+    #פונקציה המקבלת את הלשב בנוכחי במשחק, השלב זה כמות האותיות שהשחקן ניחש עד כה ומדפיסה מצב משחק מטעים
+
+
 def choose_word(file_path, index):
     with open(file_path, 'r') as file:
         words = file.read().split()
@@ -217,6 +233,7 @@ def choose_word(file_path, index):
     circular_index = (index - 1) % len(words)
 
     return unique_words_count, words[circular_index]
+#פונקציה שמקבלת קובץ ואינקדס מילה בקבוץ ומחזירה את המילה שנבחרה בוקבץ ואורך המילים בקובץ
 
 
 
@@ -254,7 +271,11 @@ def main():
     else:
         print("you lost")
 
-main()
+# פונקציה מרכזית שממשת את כל שלבי המשחק מבקשת קלט מהמשתמש בודקת אם הוא חוקי ומוסיפה אותו לרשימת התווים שנקלטו
+#אם הקלט לא חוקי המשתמש יתבקש לבחור קלט מחדש, בנוסף הפונקציה מעדכנת את מצב המשחק ומדפיסה אותו למשתמש
+#הפונקציה בודקת אם המשתמש ניצח בכל תור ואם הוא ניצח או נגמר לא מספר הכשלונות ה=שהקוצו הפונקציה תדפיס את תוצאת המשחק
 
+if __name__ == "__main__":
+    main()
 
 
