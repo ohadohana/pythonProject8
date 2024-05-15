@@ -13,7 +13,7 @@ def start_game():
                         |___/                      
     """
 
-    MAX_TRIES = random.randint(5, 10)
+    MAX_TRIES = 6
 
     print(hangman_text)
     print(f"Number of attempts allowed: {MAX_TRIES}")
@@ -218,24 +218,43 @@ def choose_word(file_path, index):
 
     return unique_words_count, words[circular_index]
 
-file_path = r"C:\\Users\\User\\python.txt"
-index = 5
-print(choose_word(file_path, index))
 
 
+def main():
+    start_game()
+    file_path = input("Please enter file path: ")
+    index = int(input("Please enter an index of a word: "))
+    unique_words_count, word = choose_word(file_path, index)
+    guees_letter=""
+    Hidden_word=show_hidden_word(word,[""])
+    print(Hidden_word)
+    old_letters=[]
+    Valid=False
+    won=False
+    counter_of_succeus=0
+    num_of_faults=6
+    print_hangman(counter_of_succeus)
+    while won==False and num_of_faults>0:
+        guees_letter = input("guess a letter")
+        Valid=try_update_letter_guessed(guees_letter,old_letters)
+        while Valid==False:
+            guees_letter = input("guess a letter")
+            Valid = try_update_letter_guessed(guees_letter, old_letters)
+        if guees_letter in word:
+            counter_of_succeus+=1
+        else:
+            num_of_faults-=1
+            print(":(")
+        print_hangman(counter_of_succeus)
+        print(show_hidden_word(word,old_letters))
+        won=check_win(word,old_letters)
 
-secret_word = "mammals"
-old_letters_guessed = ['s', 'p', 'j', 'i', 'm', 'k']
-print(show_hidden_word(secret_word, old_letters_guessed))
-print(check_win(secret_word,old_letters_guessed))
-print(print_hangman(4))
+    if won==True:
+        print("you won")
+    else:
+        print("you lost")
+
+main()
 
 
-
-
-print(try_update_letter_guessed("a",{"a","b","c"}))
-# player_guess = get_guess()
-# start_game()
-# print_hangman(1)
-# generate_underscore_string()
 
