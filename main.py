@@ -122,8 +122,46 @@ def check_valid_input(letter_guessed, old_letters_guessed):
     return True
 
 
+def try_update_letter_guessed(letter_guessed, old_letters_guessed):
+    if check_valid_input(letter_guessed, old_letters_guessed):
+        old_letters_guessed.append(letter_guessed)
+        return True
+    else:
+        print("X\n")
+        print(" -> ".join(old_letters_guessed))
+        return False
 
-print(check_valid_input("C",{"a","b"}))
+
+def show_hidden_word(secret_word, old_letters_guessed):
+    progress = ""
+
+    for char in secret_word:
+        if char in old_letters_guessed:
+            progress += char
+        else:
+            progress += "_"
+
+        progress += " "
+
+    return progress.strip()
+
+def check_win(secret_word, old_letters_guessed):
+    for char in secret_word:
+        if char not in old_letters_guessed:
+            return False
+    return True
+
+
+secret_word = "mammals"
+old_letters_guessed = ['s', 'p', 'j', 'i', 'm', 'k']
+print(show_hidden_word(secret_word, old_letters_guessed))
+print(check_win(secret_word,old_letters_guessed))
+
+
+
+
+
+print(try_update_letter_guessed("a",{"a","b","c"}))
 # player_guess = get_guess()
 # start_game()
 # print_hangman(1)
