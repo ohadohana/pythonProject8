@@ -151,12 +151,68 @@ def check_win(secret_word, old_letters_guessed):
             return False
     return True
 
+def print_hangman(num_of_tries):
+    hangman_pics = [
+        """
+        x-------x
+        """,
+        """
+        x-------x
+        |
+        |
+        |
+        |
+        |
+        """,
+        """
+        x-------x
+        |       |
+        |       0
+        |
+        |
+        |
+        """,
+        """
+        x-------x
+        |       |
+        |       0
+        |       |
+        |
+        |
+        """,
+        """
+        x-------x
+        |       |
+        |       0
+        |      /|\\
+        |
+        |
+        """,
+        """
+        x-------x
+        |       |
+        |       0
+        |      /|\\
+        |      /
+        |
+        """,
+        """
+        x-------x
+        |       |
+        |       0
+        |      /|\\
+        |      / \\
+        |
+        """
+    ]
+
+    print(hangman_pics[num_of_tries])
 
 secret_word = "mammals"
 old_letters_guessed = ['s', 'p', 'j', 'i', 'm', 'k']
 print(show_hidden_word(secret_word, old_letters_guessed))
 print(check_win(secret_word,old_letters_guessed))
-
+print(print_hangman(4))
 
 
 
