@@ -208,6 +208,22 @@ def print_hangman(num_of_tries):
 
     print(hangman_pics[num_of_tries])
 
+def choose_word(file_path, index):
+    with open(file_path, 'r') as file:
+        words = file.read().split()
+
+    unique_words_count = len(set(words))
+
+    circular_index = (index - 1) % len(words)
+
+    return unique_words_count, words[circular_index]
+
+file_path = r"C:\\Users\\User\\python.txt"
+index = 5
+print(choose_word(file_path, index))
+
+
+
 secret_word = "mammals"
 old_letters_guessed = ['s', 'p', 'j', 'i', 'm', 'k']
 print(show_hidden_word(secret_word, old_letters_guessed))
